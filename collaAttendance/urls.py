@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url,include
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("",views.grade),
+    url(r'^admin/', admin.site.urls),
+    #superjian superPass5753
+    url(r'^$',views.homepage),
+    url(r'^homepage/$',views.homepage),
+    url(r'^accounts/',include('accounts.urls')),
+    url(r'^collaAdmin/',include('attendanceSheet.urls'))
 ]
