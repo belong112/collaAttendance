@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from . models import userProfile,attendanceSheet,date_course
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from datetime import datetime
 
 # Create your views here.
 
@@ -33,4 +34,15 @@ def userAttendance_views(request):
                 atdDict[user.username].append(user.attendanceSheet.order_by('-id').get(course=course).status())
         
     return render(request,'userAtd_tepl.html',locals())
-    
+
+def sign(request):
+    if request.user.is_authenticated:
+        username=request.user.username
+        currentUser=User.objects.get(username=username)
+        today=datetime.now().strftime('%Y/%m/%d')
+        currenCourse=date_course.objects.get(date=today)
+
+        attendanceSheet.objects.filter(user=currentUser,course=currenCourse).update(presence=True,absence=False)
+        return HttpResponse('succesfully signUp')
+        
+    return redirect('/accounts/login')

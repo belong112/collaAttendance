@@ -7,5 +7,6 @@ app_name = 'collaAdmin'
 urlpatterns=[
     url(r'^userProfile/$',views.userProfiles_views,name='uerProfile'),
     url(r'^userAttendance/$',views.userAttendance_views,name='userAtd'),
+    url(r'^sign',views.sign,name='sign'),
 
 ]

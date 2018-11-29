@@ -21,11 +21,11 @@ def login_views(request):
             #login the user
             user=form.get_user()
             login(request,user)
-            return redirect('/homepage/')
+            return redirect('/')
     else:
         form=AuthenticationForm
     return render(request,'accounts/login.html',locals())
 
 def logout_views(request):
     logout(request)
-    return redirect('/homepage/')
+    return redirect('/')
